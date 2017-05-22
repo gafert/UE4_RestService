@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="POST"
+        android:id="@+id/buttonPost"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTexturl"
+        android:layout_above="@+id/buttonPost" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="URL:"
+        android:id="@+id/textViewUrl"
+        android:layout_above="@+id/editTexturl"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextID"
+        android:layout_above="@+id/textViewUrl"
+        android:layout_alignParentStart="true"
+        android:text="vital_data" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ID:"
+        android:id="@+id/textViewID"
+        android:layout_above="@+id/editTextID"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextName"
+        android:layout_above="@+id/textViewID"
+        android:layout_alignParentStart="true"
+        android:text="Vital Data" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:id="@+id/textViewName"
+        android:layout_above="@+id/editTextName"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextDia"
+        android:layout_above="@+id/textViewName"
+        android:layout_alignParentStart="true"
+        android:text="80" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Diastolic Pressure [mm Hg]:"
+        android:id="@+id/textViewDia"
+        android:layout_above="@+id/editTextDia"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextSys"
+        android:layout_above="@+id/textViewDia"
+        android:layout_alignParentStart="true"
+        android:text="160" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Systolic Pressure [mm Hg]:"
+        android:id="@+id/textViewSys"
+        android:layout_above="@+id/editTextSys"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextHeartRate"
+        android:text="60"
+        android:layout_above="@+id/textViewSys"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Heart Rate [bpm]"
+        android:id="@+id/textViewHeartRate"
+        android:layout_above="@+id/editTextHeartRate" />
+</RelativeLayout>
