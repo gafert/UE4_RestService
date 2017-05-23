@@ -1,16 +1,16 @@
 package fhtw.bsa2.gafert_steiner.ue4_restservice.bloodpressure;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Created by michi on 22.05.17.
- */
-
 public class BloodpressureParser {
+
+    private static final String TAG = "BloodpressureParser";
 
     public static ArrayList parseJsonArray(String jsonArray){
         return new ArrayList();
@@ -18,11 +18,33 @@ public class BloodpressureParser {
 
     public static ArrayList parseJsonString(String jsonString) {
 
-        try {
-            JSONArray jsonArray = new JSONArray(jsonString);
+        // Try Try and Try to get some values
+        // If it cant be parsed as a array try object
+        // If neither works do nothing
+        JSONArray jsonArray;
 
+        try {
+            // Try to make json array
+            jsonArray = new JSONArray(jsonString);
+        } catch (JSONException jsonArrayException) {
+            Log.i(TAG, "parseJsonString: Response cannot be converted to Json Array");
+            jsonArray = new JSONArray();
+            JSONObject jsonTmpObj = null;
+            try {
+                // Try to make jsonObject
+                jsonTmpObj = new JSONObject(jsonString);
+            } catch (JSONException jsonObjectException) {
+                Log.e(TAG, "parseJsonString: Response is cannot be converted to Json Object");
+                // Neither could be made make empty jsonArray
+                jsonArray = new JSONArray();
+                jsonObjectException.printStackTrace();
+            }
+            jsonArray.put(jsonTmpObj);
+        }
+
+        try {
             ArrayList<String> list = new ArrayList<>();
-            for (int i=0; i<jsonArray.length(); i++) {
+            for (int i = 0; i < jsonArray.length(); i++) {
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
@@ -34,9 +56,7 @@ public class BloodpressureParser {
                                 "Systolic: " + jsonObject.getString("systolic_pressure") + jsonObject.getString("pressure_unit") + "\n" +
                                 "Heart Rate: " + jsonObject.getString("heart_rate") + jsonObject.getString("heart_rate_unit")
                 );
-
             }
-
             return list;
         } catch (JSONException e) {
             e.printStackTrace();

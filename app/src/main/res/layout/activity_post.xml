@@ -1,107 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp">
 
     <Button
+        android:id="@+id/postButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="POST"
-        android:id="@+id/buttonPost"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTexturl"
-        android:layout_above="@+id/buttonPost" />
+        android:text="POST" />
 
     <TextView
+        android:id="@+id/textViewUrl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="URL:"
-        android:id="@+id/textViewUrl"
-        android:layout_above="@+id/editTexturl"
-        android:layout_alignParentStart="true" />
+        android:paddingTop="10dp"
+        android:text="URL:" />
 
     <EditText
+        android:id="@+id/postUrlEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="http://IP:Port/rest/items/vital_data/add"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/postTextViewID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextID"
-        android:layout_above="@+id/textViewUrl"
-        android:layout_alignParentStart="true"
+        android:text="ID:" />
+
+    <EditText
+        android:id="@+id/postEditTextID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="vital_data" />
 
     <TextView
+        android:id="@+id/postTextViewName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ID:"
-        android:id="@+id/textViewID"
-        android:layout_above="@+id/editTextID"
-        android:layout_alignParentStart="true" />
+        android:text="Name" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:id="@+id/postEditTextName"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextName"
-        android:layout_above="@+id/textViewID"
-        android:layout_alignParentStart="true"
         android:text="Vital Data" />
 
     <TextView
+        android:id="@+id/postTextViewDia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name"
-        android:id="@+id/textViewName"
-        android:layout_above="@+id/editTextName"
-        android:layout_alignParentStart="true" />
+        android:text="Diastolic Pressure [mm Hg]:" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:id="@+id/postEditTextDia"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextDia"
-        android:layout_above="@+id/textViewName"
-        android:layout_alignParentStart="true"
         android:text="80" />
 
     <TextView
+        android:id="@+id/postTextViewSys"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Diastolic Pressure [mm Hg]:"
-        android:id="@+id/textViewDia"
-        android:layout_above="@+id/editTextDia"
-        android:layout_alignParentStart="true" />
+        android:text="Systolic Pressure [mm Hg]:" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:id="@+id/postEditTextSys"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextSys"
-        android:layout_above="@+id/textViewDia"
-        android:layout_alignParentStart="true"
         android:text="160" />
 
     <TextView
+        android:id="@+id/postTextViewHeartRate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Systolic Pressure [mm Hg]:"
-        android:id="@+id/textViewSys"
-        android:layout_above="@+id/editTextSys"
-        android:layout_alignParentStart="true" />
+        android:text="Heart Rate [bpm]" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:id="@+id/postEditTextHeartRate"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextHeartRate"
-        android:text="60"
-        android:layout_above="@+id/textViewSys"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Heart Rate [bpm]"
-        android:id="@+id/textViewHeartRate"
-        android:layout_above="@+id/editTextHeartRate" />
-</RelativeLayout>
+        android:text="60" />
+</LinearLayout>

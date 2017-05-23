@@ -10,10 +10,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * Created by michi on 22.05.17.
- */
-
 public class Rest {
 
     /*
@@ -29,7 +25,7 @@ public class Rest {
      *      - Using BufferedReader, InputStreamReader (Java I/O) to get reply of action success
      */
 
-    final String TAG = "Rest";
+    private final String TAG = "Rest";
 
     public String getREST(String url) {
         String result = "NO RESULT";
@@ -62,20 +58,22 @@ public class Rest {
     }
 
     public String postREST(String url, String jsonString) {
-        String result = "NO RESULT";
+        String result = null;
 
         try {
             // openConnection
             URL mUrl = new URL(url);
             HttpURLConnection con = (HttpURLConnection) mUrl.openConnection();
-            con.setDoOutput(true); con.setRequestMethod("POST");
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json;charset=utf-8");
             con.setRequestProperty("User-Agent", "BSA");
 
             // Send POST output
             OutputStream printout = new BufferedOutputStream(con.getOutputStream());
             printout.write(jsonString.getBytes());
-            printout.flush(); printout.close();
+            printout.flush();
+            printout.close();
 
             // Get reply from Vital Server
             InputStream inputStream = con.getInputStream();
@@ -89,7 +87,7 @@ public class Rest {
             con.disconnect();
 
         } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
+            e.printStackTrace();
         }
         return result;
     }
