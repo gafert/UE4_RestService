@@ -2,8 +2,10 @@ package fhtw.bsa2.gafert_steiner.ue4_restservice;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -12,9 +14,8 @@ import fhtw.bsa2.gafert_steiner.ue4_restservice.bloodpressure.BloodPressure;
 import fhtw.bsa2.gafert_steiner.ue4_restservice.bloodpressure.BloodpressureParser;
 import fhtw.bsa2.gafert_steiner.ue4_restservice.restservices.Rest;
 
-public class PostActivity extends AppCompatActivity {
+public class PostFragment extends Fragment {
 
-    EditText postUrl;
     EditText postName;
     EditText postID;
     EditText postDia;
@@ -22,17 +23,16 @@ public class PostActivity extends AppCompatActivity {
     EditText postHeartRate;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_post);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_post, container, false);
 
-        Button postButton = (Button) findViewById(R.id.postButton);
-        postUrl = (EditText) findViewById(R.id.postUrlEditText);
-        postID = (EditText) findViewById(R.id.postEditTextID);
-        postName = (EditText) findViewById(R.id.postEditTextName);
-        postDia = (EditText) findViewById(R.id.postEditTextDia);
-        postSys = (EditText) findViewById(R.id.postEditTextSys);
-        postHeartRate = (EditText) findViewById(R.id.postEditTextHeartRate);
+        Button postButton = (Button) rootView.findViewById(R.id.postButton);
+        postID = (EditText) rootView.findViewById(R.id.postEditTextID);
+        postName = (EditText) rootView.findViewById(R.id.postEditTextName);
+        postDia = (EditText) rootView.findViewById(R.id.postEditTextDia);
+        postSys = (EditText) rootView.findViewById(R.id.postEditTextSys);
+        postHeartRate = (EditText) rootView.findViewById(R.id.postEditTextHeartRate);
 
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,9 +47,10 @@ public class PostActivity extends AppCompatActivity {
                 bloodPressure.setHeart_rate_unit("bpm");
 
                 AsyncPost mAsyncGet = new AsyncPost();
-                mAsyncGet.execute(postUrl.getText().toString(), bloodPressure);
+                mAsyncGet.execute(SettingsFragment.POSTURL, bloodPressure);
             }
         });
+        return rootView;
     }
 
     private class AsyncPost extends AsyncTask<Object, Void, String> {
@@ -66,9 +67,9 @@ public class PostActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             if (result == null) {
-                Toast.makeText(PostActivity.this, "Could not send", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Could not send", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(PostActivity.this, "Sent Data!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Sent Data!", Toast.LENGTH_SHORT).show();
             }
         }
     }

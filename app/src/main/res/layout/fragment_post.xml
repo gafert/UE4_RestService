@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/postButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="POST"
+            android:textAppearance="@android:style/TextAppearance.Material.Widget.Button" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/postTextViewID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="none"
+                    android:paddingRight="4dp"
+                    android:paddingTop="10dp"
+                    android:scrollHorizontally="false"
+                    android:text="ID" />
+
+                <EditText
+                    android:id="@+id/postEditTextID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="vital_data" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:id="@+id/postTextViewName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="none"
+                    android:paddingRight="4dp"
+                    android:paddingTop="10dp"
+                    android:scrollHorizontally="false"
+                    android:text="Name" />
+
+                <EditText
+                    android:id="@+id/postEditTextName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="Vital Data" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:id="@+id/postTextViewDia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="none"
+                    android:paddingRight="4dp"
+                    android:paddingTop="10dp"
+                    android:scrollHorizontally="false"
+                    android:text="Diastolic Pressure" />
+
+                <EditText
+                    android:id="@+id/postEditTextDia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="80" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:id="@+id/postTextViewSys"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="none"
+                    android:paddingRight="4dp"
+                    android:paddingTop="10dp"
+                    android:scrollHorizontally="false"
+                    android:text="Systolic Pressure" />
+
+                <EditText
+                    android:id="@+id/postEditTextSys"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="160" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:id="@+id/postTextViewHeartRate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="none"
+                    android:paddingRight="4dp"
+                    android:paddingTop="10dp"
+                    android:scrollHorizontally="false"
+                    android:text="Heart Rate [bpm]" />
+
+                <EditText
+                    android:id="@+id/postEditTextHeartRate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="60" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+</FrameLayout>

@@ -2,11 +2,12 @@ package fhtw.bsa2.gafert_steiner.ue4_restservice;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -14,33 +15,31 @@ import java.util.ArrayList;
 import fhtw.bsa2.gafert_steiner.ue4_restservice.bloodpressure.BloodpressureParser;
 import fhtw.bsa2.gafert_steiner.ue4_restservice.restservices.Rest;
 
-public class GetActivity extends AppCompatActivity {
+public class GetFragment extends Fragment {
 
-    private final String URL = "http://10.43.0.237:8080/rest/items";
-    private final String TAG = "GetActivity";
-    private EditText editTextUrl;
-    private Button getButton;
-    private ListView listView;
+    private final String TAG = "GetFragment";
+
+    Button getButton;
+    ListView listView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_get);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_get, container, false);
 
         // Get Layout elements
-        editTextUrl = (EditText) findViewById(R.id.getUrlEditText);
-        getButton = (Button) findViewById(R.id.getButton);
-        listView = (ListView) findViewById(R.id.getListView);
-
-        editTextUrl.setText(URL);
+        getButton = (Button) rootView.findViewById(R.id.getButton);
+        listView = (ListView) rootView.findViewById(R.id.getListView);
 
         getButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AsyncGet mAsyncGet = new AsyncGet();
-                mAsyncGet.execute(editTextUrl.getText().toString());
+                mAsyncGet.execute(SettingsFragment.GETURL);
             }
         });
+
+        return rootView;
     }
 
     private class AsyncGet extends AsyncTask<String,Void,String> {
@@ -65,7 +64,7 @@ public class GetActivity extends AppCompatActivity {
             }
 
             // Make new Adapter
-            ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(GetActivity.this, android.R.layout.simple_list_item_1, listElements);
+            ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, listElements);
             listView.setAdapter(listViewAdapter);
         }
     }
