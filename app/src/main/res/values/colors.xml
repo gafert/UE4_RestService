@@ -7,4 +7,6 @@
     <color name="white">#ffffff</color>
     <color name="nearlyWhite">#bfffffff</color>
     <color name="violetGrey">#601052</color>
+    <color name="red">#94300000</color>
+    <color name="lightRed">#dc0000</color>
 </resources>

@@ -43,19 +43,19 @@ public class BloodpressureParser {
         }
 
         try {
-            ArrayList<String> list = new ArrayList<>();
+            ArrayList<BloodPressure> list = new ArrayList<>();
             for (int i = 0; i < jsonArray.length(); i++) {
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                list.add(
-                        "ID: " + jsonObject.getString("id") + "\n" +
-                                "Name: " + jsonObject.getString("name") + "\n" +
-                                "Timestamp: " + jsonObject.getString("timestamp") + "\n" +
-                                "Diastolic: " + jsonObject.getString("diastolic_pressure") + jsonObject.getString("pressure_unit") + "\n" +
-                                "Systolic: " + jsonObject.getString("systolic_pressure") + jsonObject.getString("pressure_unit") + "\n" +
-                                "Heart Rate: " + jsonObject.getString("heart_rate") + jsonObject.getString("heart_rate_unit")
-                );
+                list.add(new BloodPressure(jsonObject.getString("id"),
+                        jsonObject.getString("name"),
+                        jsonObject.getString("timestamp"),
+                        Integer.parseInt(jsonObject.getString("diastolic_pressure")),
+                        Integer.parseInt(jsonObject.getString("systolic_pressure")),
+                        Integer.parseInt(jsonObject.getString("heart_rate")),
+                        jsonObject.getString("pressure_unit"),
+                        jsonObject.getString("heart_rate_unit")));
             }
             return list;
         } catch (JSONException e) {

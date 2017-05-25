@@ -4,151 +4,157 @@
     android:layout_height="match_parent"
     android:paddingBottom="10dp"
     android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:paddingTop="10dp">
+    android:paddingRight="10dp">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/postButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="POST"
-            android:textAppearance="@android:style/TextAppearance.Material.Widget.Button" />
-
-        <TableLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp">
+            android:orientation="vertical"
+            android:paddingTop="10dp">
 
-            <TableRow
+            <Button
+                android:id="@+id/postButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="POST"
+                android:textAppearance="@android:style/TextAppearance.Material.Widget.Button" />
+
+            <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp">
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
 
-                <TextView
-                    android:id="@+id/postTextViewID"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ellipsize="none"
-                    android:paddingRight="4dp"
-                    android:paddingTop="10dp"
-                    android:scrollHorizontally="false"
-                    android:text="ID" />
-
-                <EditText
-                    android:id="@+id/postEditTextID"
+                <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6"
-                    android:text="vital_data" />
-            </TableRow>
+                    android:layout_height="match_parent"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingBottom="10dp">
+                    <TextView
+                        android:id="@+id/postTextViewID"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ellipsize="none"
+                        android:paddingRight="4dp"
+                        android:paddingTop="10dp"
+                        android:scrollHorizontally="false"
+                        android:text="ID" />
 
-                <TextView
-                    android:id="@+id/postTextViewName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ellipsize="none"
-                    android:paddingRight="4dp"
-                    android:paddingTop="10dp"
-                    android:scrollHorizontally="false"
-                    android:text="Name" />
+                    <EditText
+                        android:id="@+id/postEditTextID"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:text="vital_data" />
+                </TableRow>
 
-                <EditText
-                    android:id="@+id/postEditTextName"
+                <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6"
-                    android:text="Vital Data" />
-            </TableRow>
+                    android:layout_height="match_parent"
+                    android:paddingBottom="10dp">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingBottom="10dp">
+                    <TextView
+                        android:id="@+id/postTextViewName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ellipsize="none"
+                        android:paddingRight="4dp"
+                        android:paddingTop="10dp"
+                        android:scrollHorizontally="false"
+                        android:text="Name" />
 
-                <TextView
-                    android:id="@+id/postTextViewDia"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ellipsize="none"
-                    android:paddingRight="4dp"
-                    android:paddingTop="10dp"
-                    android:scrollHorizontally="false"
-                    android:text="Diastolic Pressure" />
+                    <EditText
+                        android:id="@+id/postEditTextName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:text="Vital Data" />
+                </TableRow>
 
-                <EditText
-                    android:id="@+id/postEditTextDia"
+                <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6"
-                    android:text="80" />
+                    android:layout_height="match_parent"
+                    android:paddingBottom="10dp">
 
-            </TableRow>
+                    <TextView
+                        android:id="@+id/postTextViewDia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ellipsize="none"
+                        android:paddingRight="4dp"
+                        android:paddingTop="10dp"
+                        android:scrollHorizontally="false"
+                        android:text="Diastolic Pressure" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingBottom="10dp">
+                    <EditText
+                        android:id="@+id/postEditTextDia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:text="80" />
 
-                <TextView
-                    android:id="@+id/postTextViewSys"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ellipsize="none"
-                    android:paddingRight="4dp"
-                    android:paddingTop="10dp"
-                    android:scrollHorizontally="false"
-                    android:text="Systolic Pressure" />
+                </TableRow>
 
-                <EditText
-                    android:id="@+id/postEditTextSys"
+                <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6"
-                    android:text="160" />
+                    android:layout_height="match_parent"
+                    android:paddingBottom="10dp">
+
+                    <TextView
+                        android:id="@+id/postTextViewSys"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ellipsize="none"
+                        android:paddingRight="4dp"
+                        android:paddingTop="10dp"
+                        android:scrollHorizontally="false"
+                        android:text="Systolic Pressure" />
+
+                    <EditText
+                        android:id="@+id/postEditTextSys"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:text="160" />
 
 
-            </TableRow>
+                </TableRow>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingBottom="10dp">
-
-                <TextView
-                    android:id="@+id/postTextViewHeartRate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ellipsize="none"
-                    android:paddingRight="4dp"
-                    android:paddingTop="10dp"
-                    android:scrollHorizontally="false"
-                    android:text="Heart Rate [bpm]" />
-
-                <EditText
-                    android:id="@+id/postEditTextHeartRate"
+                <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6"
-                    android:text="60" />
-            </TableRow>
-        </TableLayout>
-    </LinearLayout>
+                    android:layout_height="match_parent"
+                    android:paddingBottom="10dp">
+
+                    <TextView
+                        android:id="@+id/postTextViewHeartRate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ellipsize="none"
+                        android:paddingRight="4dp"
+                        android:paddingTop="10dp"
+                        android:scrollHorizontally="false"
+                        android:text="Heart Rate [bpm]" />
+
+                    <EditText
+                        android:id="@+id/postEditTextHeartRate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:text="60" />
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+
+    </ScrollView>
 
 </FrameLayout>

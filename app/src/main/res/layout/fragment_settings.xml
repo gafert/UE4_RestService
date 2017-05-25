@@ -2,19 +2,17 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="10dp"
     android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:paddingTop="10dp">
+    android:paddingRight="10dp">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:fillViewport="true">
 
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <TableRow
                 android:layout_width="match_parent"
@@ -24,9 +22,11 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Post"
+                    android:paddingTop="20dp"
+                    android:text="POST"
                     android:textColor="@color/colorAccent"
-                    android:textSize="24sp" />
+                    android:textSize="18sp"
+                    android:textStyle="italic" />
 
             </TableRow>
 
@@ -38,7 +38,7 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/violetGrey"
+                android:background="@color/colorPrimary"
                 android:paddingBottom="10dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
@@ -48,7 +48,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="IP"
-                    android:textSize="18sp" />
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/postIP"
@@ -62,7 +62,7 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/violetGrey"
+                android:background="@color/colorPrimary"
                 android:paddingBottom="10dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp">
@@ -71,7 +71,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Port"
-                    android:textSize="18sp" />
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/postPort"
@@ -85,7 +85,7 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/violetGrey"
+                android:background="@color/colorPrimary"
                 android:paddingBottom="10dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp">
@@ -94,7 +94,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Directory      "
-                    android:textSize="18sp" />
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/postDirectory"
@@ -116,7 +116,8 @@
                     android:text="GET"
                     android:textColor="@color/colorAccent"
                     android:textColorLink="@color/colorAccent"
-                    android:textSize="24sp" />
+                    android:textSize="18sp"
+                    android:textStyle="italic" />
 
             </TableRow>
 
@@ -128,7 +129,7 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/violetGrey"
+                android:background="@color/colorPrimary"
                 android:paddingBottom="10dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
@@ -138,7 +139,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="IP"
-                    android:textSize="18sp" />
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/getIP"
@@ -152,7 +153,7 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/violetGrey"
+                android:background="@color/colorPrimary"
                 android:paddingBottom="10dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp">
@@ -161,7 +162,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Port"
-                    android:textSize="18sp" />
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/getPort"
@@ -175,7 +176,7 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/violetGrey"
+                android:background="@color/colorPrimary"
                 android:paddingBottom="10dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp">
@@ -184,7 +185,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Directory"
-                    android:textSize="18sp" />
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/getDirectory"
@@ -195,6 +196,5 @@
                     android:text="/rest/items" />
             </TableRow>
         </TableLayout>
-
-    </LinearLayout>
+    </ScrollView>
 </FrameLayout>

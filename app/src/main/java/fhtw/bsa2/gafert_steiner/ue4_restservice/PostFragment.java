@@ -1,5 +1,6 @@
 package fhtw.bsa2.gafert_steiner.ue4_restservice;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,8 @@ import android.widget.Toast;
 import fhtw.bsa2.gafert_steiner.ue4_restservice.bloodpressure.BloodPressure;
 import fhtw.bsa2.gafert_steiner.ue4_restservice.bloodpressure.BloodpressureParser;
 import fhtw.bsa2.gafert_steiner.ue4_restservice.restservices.Rest;
+
+import static fhtw.bsa2.gafert_steiner.ue4_restservice.SettingsFragment.IP_PREFS;
 
 public class PostFragment extends Fragment {
 
@@ -37,17 +40,20 @@ public class PostFragment extends Fragment {
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BloodPressure bloodPressure = new BloodPressure();
-                bloodPressure.setId(postID.getText().toString());
-                bloodPressure.setName(postName.getText().toString());
-                bloodPressure.setDiastolic_pressure(Integer.parseInt(postDia.getText().toString()));
-                bloodPressure.setSystolic_pressure(Integer.parseInt(postSys.getText().toString()));
-                bloodPressure.setPressure_unit("mm Hg");
-                bloodPressure.setHeart_rate(Integer.parseInt(postHeartRate.getText().toString()));
-                bloodPressure.setHeart_rate_unit("bpm");
+                // Make new BloodPressure Object and populate it
+                BloodPressure mBloodPressure = new BloodPressure();
+                mBloodPressure.setId(postID.getText().toString());
+                mBloodPressure.setName(postName.getText().toString());
+                mBloodPressure.setDiastolic_pressure(Integer.parseInt(postDia.getText().toString()));
+                mBloodPressure.setSystolic_pressure(Integer.parseInt(postSys.getText().toString()));
+                mBloodPressure.setPressure_unit("mm Hg");
+                mBloodPressure.setHeart_rate(Integer.parseInt(postHeartRate.getText().toString()));
+                mBloodPressure.setHeart_rate_unit("bpm");
 
+                // Get IP from settings and start sending
+                SharedPreferences settings = getActivity().getSharedPreferences(IP_PREFS, 0);
                 AsyncPost mAsyncGet = new AsyncPost();
-                mAsyncGet.execute(SettingsFragment.POSTURL, bloodPressure);
+                mAsyncGet.execute(settings.getString(SettingsFragment.POSTURL_PREF, null), mBloodPressure);
             }
         });
         return rootView;
@@ -56,11 +62,11 @@ public class PostFragment extends Fragment {
     private class AsyncPost extends AsyncTask<Object, Void, String> {
         @Override
         protected String doInBackground(Object... object) {
-            Rest mRest = new Rest();
-
+            // Start REST and parse to json
             String url = (String) object[0];
             BloodPressure bloodpressure = (BloodPressure) object[1];
 
+            Rest mRest = new Rest();
             return mRest.postREST(url, BloodpressureParser.toJsonString(bloodpressure));
         }
 

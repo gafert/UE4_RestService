@@ -8,20 +8,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/getButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:text="GET" />
 
         <ListView
             android:id="@+id/getListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/getUrlEditText" />
+            android:clickable="false"
+            android:longClickable="false" />
+
     </LinearLayout>
 
 </FrameLayout>

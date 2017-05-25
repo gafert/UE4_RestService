@@ -28,7 +28,7 @@ public class Rest {
     private final String TAG = "Rest";
 
     public String getREST(String url) {
-        String result = "NO RESULT";
+        String result = null;
 
         try {
             // openConnection and set-up connection
@@ -75,7 +75,7 @@ public class Rest {
             printout.flush();
             printout.close();
 
-            // Get reply from Vital Server
+            // Get reply from Server
             InputStream inputStream = con.getInputStream();
             StringBuffer buffer = new StringBuffer();
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));

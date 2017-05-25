@@ -14,6 +14,20 @@ public class BloodPressure {
     private String pressure_unit;
     private String heart_rate_unit;
 
+    public BloodPressure() {
+
+    }
+
+    public BloodPressure(String id, String name, String timestamp, int diastolic_pressure, int systolic_pressure, int heart_rate, String pressure_unit, String heart_rate_unit) {
+        this.id = id;
+        this.name = name;
+        this.timestamp = timestamp;
+        this.diastolic_pressure = diastolic_pressure;
+        this.systolic_pressure = systolic_pressure;
+        this.heart_rate = heart_rate;
+        this.pressure_unit = pressure_unit;
+        this.heart_rate_unit = heart_rate_unit;
+    }
 
     public String getId() {
         return id;
