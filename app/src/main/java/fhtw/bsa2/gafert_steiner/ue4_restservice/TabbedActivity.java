@@ -67,6 +67,8 @@ public class TabbedActivity extends AppCompatActivity {
                     return new PostFragment();
                 case 2:
                     return new GetFragment();
+                case 3:
+                    return new ChartFragment();
             }
             return null;
         }
@@ -74,7 +76,7 @@ public class TabbedActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 4;
         }
 
         @Override
@@ -86,6 +88,8 @@ public class TabbedActivity extends AppCompatActivity {
                     return "POST";
                 case 2:
                     return "GET";
+                case 3:
+                    return "Chart";
             }
             return null;
         }

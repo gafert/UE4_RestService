@@ -16,7 +16,7 @@ public class BloodpressureParser {
         return new ArrayList();
     }
 
-    public static ArrayList parseJsonString(String jsonString) {
+    public static ArrayList<BloodPressure> parseJsonString(String jsonString) {
 
         // Try Try and Try to get some values
         // If it cant be parsed as a array try object
