@@ -10,7 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis;
@@ -26,7 +29,7 @@ import fhtw.bsa2.gafert_steiner.ue4_restservice.bloodpressure.BloodPressure;
 import fhtw.bsa2.gafert_steiner.ue4_restservice.bloodpressure.BloodpressureParser;
 import fhtw.bsa2.gafert_steiner.ue4_restservice.restservices.Rest;
 
-import static fhtw.bsa2.gafert_steiner.ue4_restservice.SettingsFragment.IP_PREFS;
+import static fhtw.bsa2.gafert_steiner.ue4_restservice.SettingsFragment.URL_PREFS;
 
 public class ChartFragment extends Fragment {
 
@@ -41,24 +44,31 @@ public class ChartFragment extends Fragment {
 
     SwipeRefreshLayout swipeRefreshLayout;
 
-    Boolean heartRateOn = false;
-    Boolean sysOn = false;
-    Boolean diaOn = false;
+    Switch diaSwitch;
+    Switch sysSwitch;
+    Switch heartRateSwitch;
+
+    TextView mmHgDescription;
+    TextView bpmDescription;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_chart, container, false);
 
-        // Get the chart Element
-        chart = (LineChart) rootView.findViewById(R.id.chart);
+        // Get Layout
+        chart = new LineChart(getActivity());
+        FrameLayout chartLayout = (FrameLayout) rootView.findViewById(R.id.chart);
+        chartLayout.addView(chart);
+        heartRateSwitch = (Switch) rootView.findViewById(R.id.heartRate);
+        sysSwitch = (Switch) rootView.findViewById(R.id.sys);
+        diaSwitch = (Switch) rootView.findViewById(R.id.dia);
+        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swiperefresh);
+        mmHgDescription = (TextView) rootView.findViewById(R.id.mmHgDescription);
+        bpmDescription = (TextView) rootView.findViewById(R.id.bpmDescription);
 
         // Start chart creation with get settings
-        settings = getActivity().getSharedPreferences(IP_PREFS, 0);
+        settings = getActivity().getSharedPreferences(URL_PREFS, 0);
 
-        ChartFragment.AsyncGet mAsyncGet = new ChartFragment.AsyncGet();
-        mAsyncGet.execute(settings.getString(SettingsFragment.GETURL_PREF, ""));
-
-        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swiperefresh);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -67,52 +77,84 @@ public class ChartFragment extends Fragment {
             }
         });
 
-        ((Switch) rootView.findViewById(R.id.heartRate)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        heartRateSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                heartRateOn = isChecked;
-                if (isChecked) {
-                    dataSets.add(heartRateDataSet);
+                if (dataSets != null) {
+                    if (isChecked) {
+                        dataSets.add(heartRateDataSet);
+                        enableHeartRateAxis(true);
+                    } else {
+                        dataSets.remove(heartRateDataSet);
+                        enableHeartRateAxis(false);
+                    }
+                    refreshChart();
                 } else {
-                    dataSets.remove(heartRateDataSet);
+                    heartRateSwitch.setChecked(false);
                 }
-                updateChart();
             }
         });
 
-        ((Switch) rootView.findViewById(R.id.sys)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        sysSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                sysOn = isChecked;
-                if (isChecked) {
-                    dataSets.add(systolicDataSet);
+                if (dataSets != null) {
+                    if (isChecked) {
+                        dataSets.add(systolicDataSet);
+                        enablePressureAxis(true);
+                    } else {
+                        dataSets.remove(systolicDataSet);
+                        enablePressureAxis(false);
+                    }
+                    refreshChart();
                 } else {
-                    dataSets.remove(systolicDataSet);
+                    sysSwitch.setChecked(false);
                 }
-                updateChart();
             }
         });
 
-        ((Switch) rootView.findViewById(R.id.dia)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        diaSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                diaOn = isChecked;
-                if (isChecked) {
-                    dataSets.add(diastolicDataSet);
+                if (dataSets != null) {
+                    if (isChecked) {
+                        dataSets.add(diastolicDataSet);
+                        enablePressureAxis(true);
+                    } else {
+                        dataSets.remove(diastolicDataSet);
+                        enablePressureAxis(false);
+                    }
+                    refreshChart();
                 } else {
-                    dataSets.remove(diastolicDataSet);
+                    diaSwitch.setChecked(false);
                 }
-                updateChart();
             }
         });
+
+        // Autostart
+        ChartFragment.AsyncGet mAsyncGet = new ChartFragment.AsyncGet();
+        mAsyncGet.execute(settings.getString(SettingsFragment.GETURL_PREF, ""));
 
         return rootView;
     }
 
-    private void updateChart() {
-        lineData.notifyDataChanged();
-        chart.notifyDataSetChanged();
-        chart.invalidate();
+    private void enableHeartRateAxis(Boolean on) {
+        if (!on) {
+            bpmDescription.setVisibility(View.INVISIBLE);
+        } else {
+            bpmDescription.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void enablePressureAxis(Boolean on) {
+        if (!on) {
+            // Check both switches before disabling
+            if (!sysSwitch.isChecked() && !diaSwitch.isChecked()) {
+                mmHgDescription.setVisibility(View.INVISIBLE);
+            }
+        } else {
+            mmHgDescription.setVisibility(View.VISIBLE);
+        }
     }
 
     private void setupChart(ArrayList<BloodPressure> mListElements) {
@@ -148,22 +190,31 @@ public class ChartFragment extends Fragment {
         systolicDataSet.setDrawCircles(false);
         systolicDataSet.setColor(Color.GREEN);
 
-        // Add all lines to a List
+        // Add all lines to a List which are set
         dataSets = new ArrayList<ILineDataSet>();
-        if (heartRateOn) {
+        if (heartRateSwitch.isChecked()) {
             dataSets.add(heartRateDataSet);
         }
-        if (diaOn) {
+        if (diaSwitch.isChecked()) {
             dataSets.add(diastolicDataSet);
         }
-        if (sysOn) {
+        if (sysSwitch.isChecked()) {
             dataSets.add(systolicDataSet);
         }
 
-        // Add the list to a LineData
         lineData = new LineData(xValue, dataSets);
+
+        refreshChart();
+    }
+
+    private void refreshChart() {
+
+        lineData.notifyDataChanged();
+        chart.notifyDataSetChanged();
+        chart.invalidate();
+
+        // Add the list to a LineData
         //data.setValueTextSize(12f);
-        lineData.setValueTextColor(Color.WHITE);
         lineData.setDrawValues(false);
 
         // Add the lines to the chart
@@ -173,12 +224,6 @@ public class ChartFragment extends Fragment {
         chart.setDragEnabled(true);
         chart.setScaleEnabled(true);
 
-        styleChart();
-
-        chart.invalidate();
-    }
-
-    private void styleChart() {
         // Disables marker
         chart.getData().setHighlightEnabled(false);
 
@@ -193,12 +238,9 @@ public class ChartFragment extends Fragment {
 
         // Color axis
         chart.getAxisRight().setTextColor(Color.WHITE);
-        chart.getAxisRight().setDrawGridLines(true);
-        //chart.getAxisRight().setEnabled(false);
-
         chart.getAxisLeft().setTextColor(Color.WHITE);
-        chart.getAxisLeft().setDrawGridLines(true);
-        //chart.getAxisLeft().setEnabled(false);
+
+        chart.invalidate();
     }
 
     private class AsyncGet extends AsyncTask<String, Void, String> {
@@ -213,7 +255,7 @@ public class ChartFragment extends Fragment {
             swipeRefreshLayout.setRefreshing(false);
             if (result == null) {
                 // If there are no results
-
+                Toast.makeText(getActivity(), "No Server Update", Toast.LENGTH_SHORT).show();
             } else {
                 // Get the data formatted and add it to the list
                 ArrayList<BloodPressure> mListElements = BloodpressureParser.parseJsonString(result);

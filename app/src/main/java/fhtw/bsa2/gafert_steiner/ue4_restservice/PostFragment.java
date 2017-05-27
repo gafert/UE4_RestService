@@ -15,7 +15,7 @@ import fhtw.bsa2.gafert_steiner.ue4_restservice.bloodpressure.BloodPressure;
 import fhtw.bsa2.gafert_steiner.ue4_restservice.bloodpressure.BloodpressureParser;
 import fhtw.bsa2.gafert_steiner.ue4_restservice.restservices.Rest;
 
-import static fhtw.bsa2.gafert_steiner.ue4_restservice.SettingsFragment.IP_PREFS;
+import static fhtw.bsa2.gafert_steiner.ue4_restservice.SettingsFragment.URL_PREFS;
 
 public class PostFragment extends Fragment {
 
@@ -51,7 +51,7 @@ public class PostFragment extends Fragment {
                 mBloodPressure.setHeart_rate_unit("bpm");
 
                 // Get IP from settings and start sending
-                SharedPreferences settings = getActivity().getSharedPreferences(IP_PREFS, 0);
+                SharedPreferences settings = getActivity().getSharedPreferences(URL_PREFS, 0);
                 AsyncPost mAsyncGet = new AsyncPost();
                 mAsyncGet.execute(settings.getString(SettingsFragment.POSTURL_PREF, null), mBloodPressure);
             }

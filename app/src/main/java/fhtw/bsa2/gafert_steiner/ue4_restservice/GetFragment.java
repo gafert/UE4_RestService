@@ -19,7 +19,7 @@ import fhtw.bsa2.gafert_steiner.ue4_restservice.bloodpressure.BloodPressure;
 import fhtw.bsa2.gafert_steiner.ue4_restservice.bloodpressure.BloodpressureParser;
 import fhtw.bsa2.gafert_steiner.ue4_restservice.restservices.Rest;
 
-import static fhtw.bsa2.gafert_steiner.ue4_restservice.SettingsFragment.IP_PREFS;
+import static fhtw.bsa2.gafert_steiner.ue4_restservice.SettingsFragment.URL_PREFS;
 
 public class GetFragment extends Fragment {
 
@@ -41,7 +41,7 @@ public class GetFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // Start with IP specified in the settings
-                SharedPreferences settings = getActivity().getSharedPreferences(IP_PREFS, 0);
+                SharedPreferences settings = getActivity().getSharedPreferences(URL_PREFS, 0);
 
                 AsyncGet mAsyncGet = new AsyncGet();
                 mAsyncGet.execute(settings.getString(SettingsFragment.GETURL_PREF, ""));

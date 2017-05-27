@@ -17,7 +17,7 @@ import android.widget.EditText;
 public class SettingsFragment extends Fragment {
 
     // Static sharedSettings identifiers
-    public static String IP_PREFS = "IpPrefs";
+    public static String URL_PREFS = "IpPrefs";
     public static String POSTIP_PREF = "postIp";
     public static String POSTDIRECTORY_PREF = "postDirectory";
     public static String POSTPORT_PREF = "postPort";
@@ -49,7 +49,7 @@ public class SettingsFragment extends Fragment {
         getDirectory = (EditText) rootView.findViewById(R.id.getDirectory);
 
         // Set input according to last preferences
-        settings = getActivity().getSharedPreferences(IP_PREFS, 0);
+        settings = getActivity().getSharedPreferences(URL_PREFS, 0);
 
         postIP.setText(settings.getString(POSTIP_PREF, null));
         postPort.setText(settings.getString(POSTPORT_PREF, null));
