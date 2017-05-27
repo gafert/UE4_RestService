@@ -76,9 +76,7 @@ public class ChartFragment extends Fragment {
                 } else {
                     dataSets.remove(heartRateDataSet);
                 }
-                lineData.notifyDataChanged();
-                chart.notifyDataSetChanged();
-                chart.invalidate();
+                updateChart();
             }
         });
 
@@ -91,9 +89,7 @@ public class ChartFragment extends Fragment {
                 } else {
                     dataSets.remove(systolicDataSet);
                 }
-                lineData.notifyDataChanged();
-                chart.notifyDataSetChanged();
-                chart.invalidate();
+                updateChart();
             }
         });
 
@@ -106,13 +102,17 @@ public class ChartFragment extends Fragment {
                 } else {
                     dataSets.remove(diastolicDataSet);
                 }
-                lineData.notifyDataChanged();
-                chart.notifyDataSetChanged();
-                chart.invalidate();
+                updateChart();
             }
         });
 
         return rootView;
+    }
+
+    private void updateChart() {
+        lineData.notifyDataChanged();
+        chart.notifyDataSetChanged();
+        chart.invalidate();
     }
 
     private void setupChart(ArrayList<BloodPressure> mListElements) {
