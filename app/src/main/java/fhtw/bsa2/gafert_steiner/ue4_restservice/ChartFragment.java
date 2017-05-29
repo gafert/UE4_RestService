@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
@@ -13,7 +14,6 @@ import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis;
@@ -131,29 +131,44 @@ public class ChartFragment extends Fragment {
             }
         });
 
-        // Autostart
+
         ChartFragment.AsyncGet mAsyncGet = new ChartFragment.AsyncGet();
-        mAsyncGet.execute(settings.getString(SettingsFragment.GETURL_PREF, ""));
+        mAsyncGet.execute(settings.getString(SettingsFragment.GETURL_PREF, null));
+
 
         return rootView;
     }
 
+
+    /**
+     * Disables/Enables Heart Rate Axis
+     * depending on the parameter
+     *
+     * @param on
+     */
     private void enableHeartRateAxis(Boolean on) {
-        if (!on) {
-            bpmDescription.setVisibility(View.INVISIBLE);
-        } else {
+        if (on) {
             bpmDescription.setVisibility(View.VISIBLE);
+        } else {
+            bpmDescription.setVisibility(View.INVISIBLE);
         }
     }
 
+    /**
+     * Activates/Deactivates Pressure Axis
+     * depending on the parameter
+     * Won´t deactivate Axis if one Switch is still turned on
+     *
+     * @param on
+     */
     private void enablePressureAxis(Boolean on) {
-        if (!on) {
+        if (on) {
+            mmHgDescription.setVisibility(View.VISIBLE);
+        } else {
             // Check both switches before disabling
             if (!sysSwitch.isChecked() && !diaSwitch.isChecked()) {
                 mmHgDescription.setVisibility(View.INVISIBLE);
             }
-        } else {
-            mmHgDescription.setVisibility(View.VISIBLE);
         }
     }
 
@@ -162,7 +177,7 @@ public class ChartFragment extends Fragment {
         List<Entry> heartRateEntries = new ArrayList<>();
         List<Entry> diastolicEntries = new ArrayList<>();
         List<Entry> systolicEntries = new ArrayList<>();
-        List<String> xValue = new ArrayList<>();
+        List<String> xValue = new ArrayList<>();            // Used as X Value, invisible in the chart but needed
 
         // Convert bloodPressure to entry lists
         int i = 0;
@@ -202,6 +217,7 @@ public class ChartFragment extends Fragment {
             dataSets.add(systolicDataSet);
         }
 
+        // Add the lines (dataSet) to the lineData Object
         lineData = new LineData(xValue, dataSets);
 
         refreshChart();
@@ -209,16 +225,15 @@ public class ChartFragment extends Fragment {
 
     private void refreshChart() {
 
+        // Update lineData Object as the dataSet has changed
         lineData.notifyDataChanged();
-        chart.notifyDataSetChanged();
-        chart.invalidate();
+
+        // Add the lines to the chart
+        chart.setData(lineData);
 
         // Add the list to a LineData
         //data.setValueTextSize(12f);
         lineData.setDrawValues(false);
-
-        // Add the lines to the chart
-        chart.setData(lineData);
 
         // Make the chart interactive
         chart.setDragEnabled(true);
@@ -257,10 +272,17 @@ public class ChartFragment extends Fragment {
 
             if (mListElements == null) {
                 // If there are no results
-                Toast.makeText(getActivity(), "No Server Update", Toast.LENGTH_SHORT).show();
+                Snackbar snackbar = Snackbar
+                        .make(getView(), "No Server Update", Snackbar.LENGTH_SHORT);
+
+                snackbar.show();
             } else {
                 // Get the data formatted and add it to the list
                 setupChart(mListElements);
+                Snackbar snackbar = Snackbar
+                        .make(getView(), "Updated Values", Snackbar.LENGTH_SHORT);
+
+                snackbar.show();
             }
         }
     }

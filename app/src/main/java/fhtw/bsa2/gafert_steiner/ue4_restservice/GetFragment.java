@@ -3,6 +3,7 @@ package fhtw.bsa2.gafert_steiner.ue4_restservice;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -64,7 +64,10 @@ public class GetFragment extends Fragment {
 
             if (mListElements == null) {
                 // If there are no results
-                Toast.makeText(getActivity(), "There is sadly nothing to show :(", Toast.LENGTH_SHORT).show();
+                Snackbar snackbar = Snackbar
+                        .make(getView(), "There is sadly nothing to show :(", Snackbar.LENGTH_SHORT);
+
+                snackbar.show();
 
                 // Add nothing to show
                 mListElements = new ArrayList<>();
