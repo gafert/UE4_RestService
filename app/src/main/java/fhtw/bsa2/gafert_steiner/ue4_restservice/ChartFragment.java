@@ -253,19 +253,16 @@ public class ChartFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             swipeRefreshLayout.setRefreshing(false);
-            if (result == null) {
+            ArrayList<BloodPressure> mListElements = BloodpressureParser.parseJsonString(result);
+
+            if (mListElements == null) {
                 // If there are no results
                 Toast.makeText(getActivity(), "No Server Update", Toast.LENGTH_SHORT).show();
             } else {
                 // Get the data formatted and add it to the list
-                ArrayList<BloodPressure> mListElements = BloodpressureParser.parseJsonString(result);
-
-                if (mListElements != null) {
-                    setupChart(mListElements);
-                }
+                setupChart(mListElements);
             }
         }
     }
-
-
 }
+

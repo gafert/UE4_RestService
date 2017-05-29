@@ -60,18 +60,19 @@ public class GetFragment extends Fragment {
 
         @Override
         protected void onPostExecute (String result){
-            if (result == null) {
+            ArrayList mListElements = BloodpressureParser.parseJsonString(result);
+
+            if (mListElements == null) {
                 // If there are no results
                 Toast.makeText(getActivity(), "There is sadly nothing to show :(", Toast.LENGTH_SHORT).show();
 
                 // Add nothing to show
-                ArrayList<String> mListElements = new ArrayList<>();
+                mListElements = new ArrayList<>();
                 mListElements.add("Nothing to show :(");
                 ArrayAdapter<String> mListViewAdapter = new ArrayAdapter<>(getActivity(), R.layout.fragment_get_listview_element_error, mListElements);
                 listView.setAdapter(mListViewAdapter);
             } else {
                 // Get the data formatted and add it to the list
-                ArrayList mListElements = BloodpressureParser.parseJsonString(result);
                 ArrayAdapter<BloodPressure> mListViewAdapter = new BloodArrayAdapter(getActivity(), R.layout.fragment_get_listview_element, mListElements);
                 listView.setAdapter(mListViewAdapter);
             }

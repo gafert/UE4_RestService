@@ -6,7 +6,7 @@
     <color name="background">#121212</color>
     <color name="white">#ffffff</color>
     <color name="nearlyWhite">#bfffffff</color>
-    <color name="violetGrey">#601052</color>
-    <color name="red">#94300000</color>
-    <color name="lightRed">#dc0000</color>
+    <color name="red">#ff0000</color>
+    <color name="blue">#1e00ff</color>
+    <color name="green">#4cff00</color>
 </resources>
