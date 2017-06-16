@@ -44,6 +44,7 @@ public class PostFragment extends Fragment {
                 BloodPressure mBloodPressure = new BloodPressure();
                 mBloodPressure.setId(postID.getText().toString());
                 mBloodPressure.setName(postName.getText().toString());
+                mBloodPressure.setTimestamp("Ich wäre ein Datum");  // Datum kann geändert werden oder mit new Date()
                 mBloodPressure.setDiastolic_pressure(Integer.parseInt(postDia.getText().toString()));
                 mBloodPressure.setSystolic_pressure(Integer.parseInt(postSys.getText().toString()));
                 mBloodPressure.setPressure_unit("mm Hg");

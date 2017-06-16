@@ -270,19 +270,22 @@ public class ChartFragment extends Fragment {
             swipeRefreshLayout.setRefreshing(false);
             ArrayList<BloodPressure> mListElements = BloodpressureParser.parseJsonString(result);
 
-            if (mListElements == null) {
-                // If there are no results
-                Snackbar snackbar = Snackbar
-                        .make(getView(), "No Server Update", Snackbar.LENGTH_SHORT);
+            if (mListElements != null) {
 
-                snackbar.show();
-            } else {
-                // Get the data formatted and add it to the list
-                setupChart(mListElements);
-                Snackbar snackbar = Snackbar
-                        .make(getView(), "Updated Values", Snackbar.LENGTH_SHORT);
+                if (mListElements.isEmpty()) {
+                    // If there are no results
+                    Snackbar snackbar = Snackbar
+                            .make(getView(), "No Server Update", Snackbar.LENGTH_SHORT);
 
-                snackbar.show();
+                    snackbar.show();
+                } else {
+                    // Get the data formatted and add it to the list
+                    setupChart(mListElements);
+                    Snackbar snackbar = Snackbar
+                            .make(getView(), "Updated Values", Snackbar.LENGTH_SHORT);
+
+                    snackbar.show();
+                }
             }
         }
     }

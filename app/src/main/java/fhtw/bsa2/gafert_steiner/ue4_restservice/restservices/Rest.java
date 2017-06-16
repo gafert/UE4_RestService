@@ -45,7 +45,10 @@ public class Rest {
             String output;
 
             while ((output = br.readLine()) != null) {
-                result = output;
+                if (result == null) {
+                    result = "";
+                }
+                result += output;
             }
 
             con.disconnect();
